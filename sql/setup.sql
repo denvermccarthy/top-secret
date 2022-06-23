@@ -8,3 +8,16 @@ CREATE TABLE users (
   name VARCHAR NOT NULL,
   password_hash VARCHAR NOT NULL
 );
+
+DROP TABLE IF EXISTS secrets;
+
+CREATE TABLE secrets (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  title VARCHAR NOT NULL,
+  description VARCHAR NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO secrets (title, description) VALUES 
+('Top Secret Info', 'HTML is not a programming language'),
+('Classified', 'My name is Denver');
