@@ -31,6 +31,16 @@ describe('user route testing', () => {
       .send({ email: 'test@example.com', password: 'hello world' });
     expect(res.status).toEqual(200);
   });
+
+  test('delete to /sessions should sign in an existing user', async () => {
+    await signUp();
+    const res = await request(app)
+      .post('/api/v1/users/sessions')
+      .send({ email: 'test@example.com', password: 'hello world' });
+    const out = await request(app).delete('/api/v1/users/sessions');
+    expect(res.status).toEqual(200);
+    expect(out.body.message).toEqual('signed out succesfully');
+  });
   afterAll(() => {
     pool.end();
   });
